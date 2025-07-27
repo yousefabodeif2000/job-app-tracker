@@ -32,7 +32,7 @@ class JobApplication(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='APPLIED')
     location = models.CharField(max_length=100, blank=True, null=True)
     date_applied = models.DateField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f"{self.title} at {self.company} ({self.status})"

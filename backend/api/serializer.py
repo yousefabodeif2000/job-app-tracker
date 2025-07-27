@@ -18,7 +18,8 @@ class JobApplicationSerializer(serializers.ModelSerializer):
         source='tags',
         queryset=Tag.objects.all(),
         many=True,
-        write_only=True
+        write_only=True,
+        required=False, 
     )
 
     class Meta:
@@ -29,6 +30,9 @@ class JobApplicationSerializer(serializers.ModelSerializer):
             'tags',      
             'tag_ids'    
         ]
+        extra_kwargs = {
+            'user': {'required': False, 'allow_null': True}
+        }
 
     def validate(self, data):
         status = data.get('status')
